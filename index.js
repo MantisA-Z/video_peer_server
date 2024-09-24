@@ -13,13 +13,25 @@ const {v4: uuid} = require('uuid')
 
 const userMap = new Map()
 
-app.use(cors())
+app.use(cors({
+    origin: '*',  // Or specify the exact origin
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+    exposedHeaders: ['Authorization'],
+}));
+
 
 app.get('/', (req, res) => {
     res.send('yo what\'s us')
 })
 
-const peerServer = PeerServer({ path: '/peerjs', server: server})
+const peerServer = PeerServer({ 
+    path: '/peerjs', 
+    server: server,
+    allow_origins: '*', // Adjust as necessary for security
+});
+
 peerServer.on('connection', (client) => {
     console.log('New peer connected:', client.id);
 });
