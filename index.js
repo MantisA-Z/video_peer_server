@@ -20,8 +20,16 @@ app.get('/', (req, res) => {
 })
 
 const peerServer = PeerServer({port: process.env.PEER_SERVER_PORT, path: '/peerjs', server: process.env.PEER_SERVER_URL})
+peerServer.on('connection', (client) => {
+    console.log('New peer connected:', client.id);
+});
+
+peerServer.on('disconnect', (client) => {
+    console.log('Peer disconnected:', client.id);
+});
+
 peerServer.on('error', (err) => {
-    console.error('Peer error:', err);
+    console.error('PeerJS error:', err);
 });
 
 
