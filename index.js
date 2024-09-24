@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
     res.send('yo what\'s us')
 })
 
-const peerServer = PeerServer({port: process.env.PEER_SERVER_PORT, path: '/peerjs', server: process.env.PEER_SERVER_URL})
+const peerServer = PeerServer({ path: '/peerjs', server: server})
 peerServer.on('connection', (client) => {
     console.log('New peer connected:', client.id);
 });
