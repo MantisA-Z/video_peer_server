@@ -30,6 +30,7 @@ const peerServer = PeerServer({
     path: '/peerjs', 
     server: server,
     allow_origins: '*', // Adjust as necessary for security
+    key: '/peerjs'
 });
 
 peerServer.on('connection', (client) => {
